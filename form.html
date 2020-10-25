@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	Operating System	
+	</title>
+	<meta charset="utf-8">
+ <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
+       
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/f-style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+</head>
+<body>
+  <header class="main-header">
+        <nav class="navbar navbar-static-top navbar-expand-lg">
+            
+            <div class="navbar-top ">
+              <div class="container">
+                  <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <ul class="list-unstyled list-inline header-contact">
+                           <li> <i class="fa fa-envelope"></i> <a class="lnk" href="mailto:anuraj.agarwal2019@vitstudent.ac.in">contact@OurTeam</a> </li>
+                       </ul> 
+                    </div>
+                    <div class="col-sm-6 col-xs-12 text-right">
+                        <ul class="list-unstyled list-inline header-social">
+                            <li> <a class="lnk" href="#"> <i class="fa fa-facebook"></i> </a> </li>
+                            <li> <a class="lnk" href="#"> <i class="fa fa-linkedin"></i>  </a> </li>
+                            <li> <a class="lnk" href="#"> <i class="fa fa-google"></i>  </a> </li>
+                       </ul>
+                    </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="navbar-main ">
+              <div class="container">
+                <div class="navbar-header">
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                  
+                  <a class="lnk" class="navbar-brand" href="index.html"><img src="logo.png" style="width: 80px;height: 50px" alt=""></a>
+                  
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse pull-right">
+
+                  <ul class="nav navbar-nav ml-auto">
+
+                    <li><a class="lnk" class="is-active" href="index.html">HOME</a></li>
+                    <li><a class="lnk" href="developers.html">ABOUT</a></li>
+                    <li class="has-child"><a class="lnk" href="#">FORM</a>
+
+                      <ul class="submenu">
+                         <li class="submenu-item"><a class="lnk" href="form.html">Fill The Form</a></li>
+                         <li class="submenu-item"><a class="lnk" href="select.html">Know your Appointment</a></li>
+                      </ul>
+
+                    <li><a class="lnk" href="contact.html">CONTACT</a></li>
+                  </ul>
+                </div> 
+              </div> 
+            </div>
+        </nav> 
+
+    </header> <!-- /. main-header -->
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active ">
+        <a class="nav-link" href="form.html">Fill form</a>
+      </li>
+      </ul>
+  </div>
+</nav> -->
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Appointment Form </h1>
+    <p class="lead">Our algorithm will prioritize the patients according to their age and again prioritized on the basis of symptoms and medical history.
+</p>
+  </div>
+</div>
+  <div class="py-5">
+    <h2 class="text-center">Application Details</h2>
+  </div>
+  <div class=" w-50 m-auto">
+    <form method="GET">
+      <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="Name">Patient Name</label>
+            <input type="Name" class="form-control" value='' id="Name" placeholder="Name" required="">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="Age">Age</label>
+            <input type="number" class="form-control" id="Age" placeholder="Age" required="">
+          </div>
+        </div>
+      <div class="form-group">
+        <label for="inputAddress">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required="">
+      </div>
+    <fieldset class="form-group" required="">
+      <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">Symptoms</legend>
+        <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" onclick ="onCheckChange1();" type="checkbox" value="" id="Check1">
+          <label class="form-check-label" for="Check1">Fever</label>
+        </div>
+        <div class="col-sm-10">
+          <select class="custom-select my-1 mr-sm-2" id="choice1"  disabled="" >
+            <option value="0" selected>Choose...</option>
+            <option value="1">Low</option>
+            <option value="2">Moderate</option>
+            <option value="3">High</option>
+          </select>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" onclick ="onCheckChange2();" type="checkbox" value="" id="Check2" >
+          <label class="form-check-label" for="Check2">Cough</label>
+        </div>
+        <div class="col-sm-10">
+          <select class="custom-select my-1 mr-sm-2" id="choice2" disabled="">
+            <option value="0" selected>Choose...</option>
+            <option value="1">Acute</option>
+            <option value="2">Moderate</option>
+            <option value="3">Critical</option>
+          </select>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" onclick ="onCheckChange3();" type="checkbox" value="" id="Check3">
+          <label class="form-check-label" for="Check3">Breathlessness</label>
+        </div>
+           <div class="col-sm-10">
+              <select class="custom-select my-1 mr-sm-2" id="choice3" disabled="">
+                <option value="0" selected>Choose...</option>
+                <option value="1">Acute</option>
+                <option value="2">Moderate</option>
+                <option value="3">Critical</option>
+              </select>
+           </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="form-group" required="">
+      <div class="row">
+          <legend class="col-form-label col-sm-2 pt-0">Medical History</legend>
+          <div class="col-sm-10">
+             <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+                <label class="form-check-label" for="defaultCheck4">Heart Disease</label>
+              </div>
+              
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck5">
+                <label class="form-check-label" for="defaultCheck5">Kidney/Liver Disorder</label>
+              </div>
+          
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="defaultCheck6">
+                <label class="form-check-label" for="defaultCheck6">Lung Related diseases</label>
+              </div>
+          </div>
+      </div>
+    </fieldset>
+    <div class="form-group"> 
+      <button name ="submit" type="submit" class=" button btn btn-success"><span>Submit</span>
+      </button>
+    </div>
+  </form>
+  
+   
+</div>
+
+
+<footer class="pt-5">
+  <h6 class="p-3 bg-dark text-white text-center">@the_group</h6>
+</footer>
+
+<script type="text/javascript">
+  // $("#Check1").val("FALSE");
+
+function onCheckChange1() {
+    if ($("#Check1").is(':checked')) {
+      $("#choice1").removeAttr('disabled');
+       
+        $("#Check1").val("TRUE");
+    } else {
+         $("#choice1").attr('disabled', 'disabled');
+         $("#choice1").val("0");
+        $("#Check1").val("FALSE");
+    }
+}
+
+function onCheckChange2() {
+    if ($("#Check2").is(':checked')) {
+      $("#choice2").removeAttr('disabled');
+       
+        $("#Check2").val("TRUE");
+    } else {
+         $("#choice2").attr('disabled', 'disabled');
+         $("#choice1").val("0");
+        $("#Check2").val("FALSE");
+    }
+}
+
+function onCheckChange3() {
+    if ($("#Check3").is(':checked')) {
+      $("#choice3").removeAttr('disabled');
+       
+        $("#Check3").val("TRUE");
+    } else {
+         $("#choice3").attr('disabled', 'disabled');
+         $("#choice1").val("0");
+        $("#Check3").val("FALSE");
+    }
+}
+
+</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script >
+ 
+</script>
+</body>
+</html>
