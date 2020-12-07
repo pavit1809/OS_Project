@@ -1,0 +1,122 @@
+//input will come as a array of objects 
+const prev_medical_history=200.0;
+function totscore(age_score,symptoms_score,medical_history_score){
+   return ((0.4)*symptoms_score+(0.3)*age_score+(0.3)*medical_history_score);
+}
+function get_age_score(age){
+   var retval=0.0;
+   if (age<=13){
+      return (14.0-age)*(3.0);
+   }
+   if (age>13 && age<=50){
+      return 1.0;
+   }
+   if (age>50){
+      return (age-51)*(2.0);
+   }
+   return retval;
+}
+function get_symptoms_score(severity_cough,severity_fever,severity_breathlessness){
+   var estimate=0.0;
+   var symptomsscore=[0.0,100.0,200.0];
+   estimate=estimate+((0.5)*(symptomsscore[severity_breathlessness-1]));
+   estimate=estimate+((0.3)*(symptomsscore[severity_fever-1]));
+   estimate=estimate+((0.2)*(symptomsscore[severity_cough-1]));
+   return estimate;
+}
+function get_history_priority(neuro_history,cardio_history,gastric_history){
+   var ret=0.0;
+   if (neuro_history==1){
+      ret=ret+((0.2)*prev_medical_history);
+   }
+   if (gastric_history==1){
+      ret=ret+((0.3)*prev_medical_history);
+   }
+   if (cardio_history==1){
+      ret=ret+((0.5)*prev_medical_history);
+   }
+   return ret;
+}
+var details=data;
+var static_scores=[];
+for(var i=0;i<=details.length-1;i++){
+   var subscores=[];
+   subscores.push(details[i].reference_number);
+   var age_priority=get_age_score(parseFloat(details[i].age));
+   var symptoms_priority=get_symptoms_score(details[i].Severity_cough,details[i].Severity_fever,details[i].Severity_breathlessness);
+   var history_priority=get_history_priority(details[i].neurological_history,details[i].cardiovascular_history,details[i].gastric_history);
+   var final_score=totscore(age_priority,symptoms_priority,history_priority);
+   subscores.push(final_score);
+   subscores.push(details[i].reference_number);
+   subscores.push(details[i].Booking_time);
+   subscores.push(details[i].name);
+   static_scores.push(subscores);
+}
+function comparator(a,b){
+   if (a[0]==b[0]){
+      if (a[2][0]!=b[2][0]){
+         var ha=parseInt(a[2][0]);
+         var hb=parseInt(b[2][0])
+         return (a[2][0]<=b[2][0]-1)?-1: 1;   
+      }
+      if (a[2][0]==b[2][0]){
+         //7:18:18
+         var mina=a[2][2]+a[2][3];
+         mina=parseInt(mina);
+         var minb=b[2][2]+b[2][3];
+         minb=parseInt(minb);
+         if (mina!=minb){
+            return (mina<=minb-1)?-1: 1;
+         }
+         if (mina==minb){
+            var seca=a[2][5]+a[2][6];
+            seca=parseInt(seca);
+            var secb=b[2][5]+b[2][6];
+            secb=parseInt(secb);
+            return (seca<=secb)?-1:1;
+         }
+      }
+   }
+   if (a[0]!=b[0]){
+      return (a[0]>b[0])?-1: 1;
+   }
+}
+static_scores.sort(comparator);
+var refno=prefno;
+var ind;
+for(var i=0;i<=static_scores.length-1;i++){
+   if (static_scores[i][1]==refno){
+      ind=i+1;
+      break;
+   }
+}
+var hr=10;
+var min=0;
+for(var i=2;i<=ind;i++){
+   if (i%2==0){
+      min=30;
+   }
+   if (i%2!=0){
+      hr+=1;
+      min=0;
+   }
+}
+if (ind>=7){
+   hr-=12;
+}
+var finaltime="";
+finaltime+=hr;
+finaltime+=':';
+if (min==0){
+   finaltime+='00';
+}
+if (min!=0){
+   finaltime+=min;
+}
+finaltime+=':00';
+if (ind>=5){
+   finaltime+=' PM';
+}
+if (ind<5){
+   finaltime+=' AM';
+}

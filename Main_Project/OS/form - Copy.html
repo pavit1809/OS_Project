@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	Operating System	
+	</title>
+	<meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html">Covid Patient Scheduling</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active ">
+        <a class="nav-link" href="form.html">Fill form</a>
+      </li>
+      </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Appointment Form </h1>
+    <p class="lead">Our algorithm will prioritize the patients according to their age and again prioritized on the basis of symptoms and medical history.
+</p>
+  </div>
+</div>
+<!-- <section class="fo wy-5"> -->
+  <div class="py-5">
+    <h2 class="text-center">Application Details</h2>
+  </div>
+  <div class=" w-50 m-auto">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="Name">Patient Name</label>
+          <input type="Name" class="form-control" id="Name" placeholder="Name">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="Age">Age</label>
+          <input type="number" class="form-control" id="Age" placeholder="Age">
+        </div>
+      </div>
+    <div class="form-group">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">Symptoms</legend>
+      <div class="col-sm-10">
+    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">Fever</label>
+  </div>
+  <div class="col-sm-10">
+  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+    <option selected>Choose...</option>
+    <option value="1">Low</option>
+    <option value="2">Moderate</option>
+    <option value="3">High</option>
+  </select>
+       </div>
+     <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">Cough</label>
+  </div>
+  <div class="col-sm-10">
+  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+    <option selected>Choose...</option>
+    <option value="1">Acute</option>
+    <option value="2">Moderate</option>
+    <option value="3">Critical</option>
+  </select>
+       </div>
+     <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">Breathlessness</label>
+  </div>
+  <div class="col-sm-10">
+  <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+    <option selected>Choose...</option>
+    <option value="1">Acute</option>
+    <option value="2">Moderate</option>
+    <option value="3">Critical</option>
+  </select>
+       </div>
+    </div></div>
+  </fieldset>
+  <fieldset class="form-group">
+    <div class="row">
+      <legend class="col-form-label col-sm-2 pt-0">Medical History</legend>
+      <div class="col-sm-10">
+     <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">Heart Disease</label>
+  </div>
+  
+    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">Kidney/Liver Disorder</label>
+  </div>
+  
+     <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+  <label class="form-check-label" for="defaultCheck1">Lung Related diseases</label>
+  </div>
+  </div>
+    </div>
+  </fieldset>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="Days">Days the symptoms first occuured</label>
+      <input type="text" class="form-control" id="Days">
+    </div>
+  </div>
+   <div class="form-group"> 
+   <button name ="submit" type="submit" class=" button btn btn-success"><span>Submit</span>
+        <span>Submit</span></button>
+  </div>
+</form>
+
+   
+  </div>
+<!-- </section>  -->
+<footer class="pt-5">
+  <h6 class="p-3 bg-dark text-white text-center">@the_group</h6>
+</footer>
+
+
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script >
+ 
+</script>
+</body>
+</html>

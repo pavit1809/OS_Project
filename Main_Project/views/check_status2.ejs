@@ -1,0 +1,428 @@
+<% //input will come as a array of objects  %>
+<% const prev_medical_history=200.0; %>
+<% function totscore(age_score,symptoms_score,medical_history_score){ %>
+<%    return ((0.4)*symptoms_score+(0.3)*age_score+(0.3)*medical_history_score); %>
+<% } %>
+<% function get_age_score(age){ %>
+<%    var retval=0.0; %>
+<%    if (age<=13){ %>
+<%       return (14.0-age)*(3.0); %>
+<%    } %>
+<%    if (age>13 && age<=50){ %>
+<%       return 1.0; %>
+<%    } %>
+<%    if (age>50){ %>
+<%       return (age-51)*(2.0); %>
+<%    } %>
+<%    return retval; %>
+<% } %>
+<% function get_symptoms_score(severity_cough,severity_fever,severity_breathlessness){ %>
+<%    var estimate=0.0; %>
+<%    var symptomsscore=[0.0,100.0,200.0]; %>
+<%    estimate=estimate+((0.5)*(symptomsscore[severity_breathlessness-1])); %>
+<%    estimate=estimate+((0.3)*(symptomsscore[severity_fever-1])); %>
+<%    estimate=estimate+((0.2)*(symptomsscore[severity_cough-1])); %>
+<%    return estimate; %>
+<% } %>
+<% function get_history_priority(neuro_history,cardio_history,gastric_history){ %>
+<%    var ret=0.0; %>
+<%    if (neuro_history==1){ %>
+<%       ret=ret+((0.2)*prev_medical_history); %>
+<%    } %>
+<%    if (gastric_history==1){ %>
+<%       ret=ret+((0.3)*prev_medical_history); %>
+<%    } %>
+<%    if (cardio_history==1){ %>
+<%       ret=ret+((0.5)*prev_medical_history); %>
+<%    } %>
+<%    return ret; %>
+<% } %>
+<% var details=data; %>
+<% var static_scores=[]; %>
+<% for(var i=0;i<=details.length-1;i++){ %>
+<%    var subscores=[]; %>
+<%    var age_priority=get_age_score(parseFloat(details[i].age)); %>
+<%    var symptoms_priority=get_symptoms_score(details[i].Severity_cough,details[i].Severity_fever,details[i].Severity_breathlessness); %>
+<%    var history_priority=get_history_priority(details[i].neurological_history,details[i].cardiovascular_history,details[i].gastric_history); %>
+<%    var final_score=totscore(age_priority,symptoms_priority,history_priority); %>
+<%    subscores.push(final_score); %>
+<%    subscores.push(details[i].reference_number); %>
+<%    subscores.push(details[i].Booking_time); %>
+<%    subscores.push(details[i].name); %>
+<%    static_scores.push(subscores); %>
+<% } %>
+<% function comparator(a,b){ %>
+<%    if (a[0]==b[0]){ %>
+<%       if (a[2][0]!=b[2][0]){ %>
+<%          var ha=parseInt(a[2][0]); %>
+<%          var hb=parseInt(b[2][0]) %>
+<%          return (a[2][0]<=b[2][0]-1)?-1: 1;    %>
+<%       } %>
+<%       if (a[2][0]==b[2][0]){ %>
+<%          //7:18:18 %>
+<%          var mina=a[2][2]+a[2][3]; %>
+<%          mina=parseInt(mina); %>
+<%          var minb=b[2][2]+b[2][3]; %>
+<%          minb=parseInt(minb); %>
+<%          if (mina!=minb){ %>
+<%             return (mina<=minb-1)?-1: 1; %>
+<%          } %>
+<%          if (mina==minb){ %>
+<%             var seca=a[2][5]+a[2][6]; %>
+<%             seca=parseInt(seca); %>
+<%             var secb=b[2][5]+b[2][6]; %>
+<%             secb=parseInt(secb); %>
+<%             return (seca<=secb)?-1:1; %>
+<%          } %>
+<%       } %>
+<%    } %>
+<%    if (a[0]!=b[0]){ %>
+<%       return (a[0]>b[0])?-1: 1; %>
+<%    } %>
+<% } %>
+<% static_scores.sort(comparator); %>
+<% var refno=prefno; %>
+<% var ind; %>
+<% for(var i=0;i<=static_scores.length-1;i++){ %>
+<%    if (static_scores[i][1]==refno){ %>
+<%       ind=i+1; %>
+<%       break; %>
+<%    } %>
+<% } %>
+<% var hr=10; %>
+<% var min=0; %>
+<% for(var i=2;i<=ind;i++){ %>
+<%    if (i%2==0){ %>
+<%       min=30; %>
+<%    } %>
+<%    if (i%2!=0){ %>
+<%       hr+=1; %>
+<%       min=0; %>
+<%    } %>
+<% } %>
+<% if (ind>=7){ %>
+<%    hr-=12; %>
+<% } %>
+<% var finaltime=""; %>
+<% finaltime+=hr; %>
+<% finaltime+=':'; %>
+<% if (min==0){ %>
+<%    finaltime+='00'; %>
+<% } %>
+<% if (min!=0){ %>
+<%    finaltime+=min; %>
+<% } %>
+<% finaltime+=':00'; %>
+<% if (ind>=5){ %>
+<%    finaltime+=' PM'; %>
+<% } %>
+<% if (ind<=4){ %>
+<%    finaltime+=' AM'; %>
+<% } %>
+<%console.log("<=================================>")%>
+<%console.log("Name: "+static_scores[ind-1][3])%>
+<%console.log("Score: "+static_scores[ind-1][0])%>
+<%console.log("Appointment Time: "+finaltime)%>
+<%console.log("Reference Number :"+static_scores[ind-1][1])%>
+<!-- =============================> @@@@@@@@@ -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	Operating System	
+	</title>
+	<meta charset="utf-8">
+ <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>
+       
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/s-style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+</head>
+<body onload="initLocalClocks();">
+
+  <div id="loader"></div>
+        <div id="content">
+  <script type="text/javascript">
+    var loader;
+
+function loadNow(opacity) {
+    if (opacity <= 0) {
+        displayContent();
+    } else {
+        loader.style.opacity = opacity;
+        window.setTimeout(function() {
+            loadNow(opacity - 0.01);
+        }, 20);
+    }
+}
+
+function displayContent() {
+    loader.style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    loader = document.getElementById('loader');
+    loadNow(1);
+});
+  </script>
+  <header class="main-header">
+   <nav class="navbar navbar-static-top navbar-expand-lg">
+       
+       <div class="navbar-top ">
+         <div class="container">
+             <div class="row">
+               <div class="col-sm-6 col-xs-12">
+                   <ul class="list-unstyled list-inline header-contact">
+                      <li> <i class="fa fa-envelope"></i> <a class="lnk" href="mailto:anuraj.agarwal2019@vitstudent.ac.in">contact@OurTeam</a> </li>
+                  </ul> 
+               </div>
+               <div class="col-sm-6 col-xs-12 text-right">
+                   <ul class="list-unstyled list-inline header-social">
+                       <li> <a class="lnk" href="#"> <i class="fa fa-facebook"></i> </a> </li>
+                       <li> <a class="lnk" href="#"> <i class="fa fa-linkedin"></i>  </a> </li>
+                       <li> <a class="lnk" href="#"> <i class="fa fa-google"></i>  </a> </li>
+                  </ul>
+               </div>
+             </div>
+         </div>
+       </div>
+
+       <div class="navbar-main ">
+         <div class="container">
+           <div class="navbar-header">
+             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+           </button>
+             
+             <a class="lnk" class="navbar-brand" href="/"><img src="logo.png" style="width: 80px;height: 50px" alt=""></a>
+             
+           </div>
+
+           <div id="navbar" class="navbar-collapse collapse pull-right">
+
+             <ul class="nav navbar-nav ml-auto">
+
+               <li><a class="lnk" class="is-active" href="/">HOME</a></li>
+               <li><a class="lnk" href="/developerinfo">ABOUT</a></li>
+               <li class="has-child"><a class="lnk" href="#">FORM</a>
+
+                 <ul class="submenu">
+                    <li class="submenu-item"><a class="lnk" href="/openform">Fill The Form</a></li>
+                    <li class="submenu-item"><a class="lnk" href="/check">Know your Appointment</a></li>
+                 </ul>
+
+               <li><a class="lnk" href="/contact">CONTACT</a></li>
+             </ul>
+           </div> 
+         </div> 
+       </div>
+   </nav> 
+
+</header> 
+    <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Appointment Details</h1>
+    <p class="lead">Please insert your unique ID to know the details like time of your appointment.
+</p>
+  </div>
+</div>
+<div id ="tble" class=" container py-5">
+  <!-- <div class="row py-5"> -->
+    <div class="col-lg-8 mx-auto">
+      <div class="card rounded border-1">
+        <div class="card-body p-5 bg-white rounded">
+          <div class="table-responsive">
+            <table id="example" style="width:100%" class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><%=static_scores[ind-1][1]%></td>
+                  <td><%=static_scores[ind-1][3]%></td>
+                  <td><input type="text" id="P1" value=<%=finaltime%> disabled/></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <article class="clock">
+  <div class="hours-container">
+    <div class="hours"></div>
+  </div>
+  <div class="minutes-container">
+    <div class="minutes"></div>
+  </div>
+  <div class="seconds-container">
+    <div class="seconds"></div>
+  </div>
+</article>
+  </div>
+
+
+
+<script type="text/javascript">
+
+
+function initLocalClocks() {
+  var date = new Date;
+  var str=(date.getYear()+1900).toString();
+  str+="-"+(date.getMonth()+1).toString();
+  str+="-"+date.getDate().toString();
+  str+=" "+($('#P1').val()).toString();
+  var obj=new Date(str);
+  var seconds = obj.getSeconds();
+  var minutes = obj.getMinutes();
+  var hours = obj.getHours();
+  var hands = [
+    {
+      hand: 'hours',
+      angle: (hours * 30) + (minutes / 2)
+    },
+    {
+      hand: 'minutes',
+      angle: (minutes * 6)
+    },
+    {
+      hand: 'seconds',
+      angle: (seconds * 6)
+    }
+  ];
+  // Loop through each of these hands to set their angle
+  for (var j = 0; j < hands.length; j++) {
+    var elements = document.querySelectorAll('.' + hands[j].hand);
+    for (var k = 0; k < elements.length; k++) {
+        elements[k].style.webkitTransform = 'rotateZ('+ hands[j].angle +'deg)';
+        elements[k].style.transform = 'rotateZ('+ hands[j].angle +'deg)';
+        // If this is a minute hand, note the seconds position (to calculate minute position later)
+        if (hands[j].hand === 'minutes') {
+          elements[k].parentNode.setAttribute('data-second-angle', hands[j + 1].angle);
+        }
+    }
+  }
+}
+
+function onbtnclick(){
+  var box=document.getElementById('srch');
+  var tble=document.getElementById('tble');
+  box.style.display="none";
+  tble.style.display="block";
+}
+
+</script>
+<footer class="main-footer">
+
+        <div class="footer-top">
+            
+        </div>
+
+
+        <div class="footer-main">
+            <div class="container">
+                
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <div class="footer-col">
+
+                            <h4 class="footer-title">About us <span class="title-under"></span></h4>
+
+                            <div class="footer-content">
+
+                                <p>
+                                    <strong>The Mask</strong> We made a fully responsive portal which takes input from the visitor which consists of his/her age, symptoms, past medical   history, seriousness of symptoms and date on which the patient got the symptoms.
+                                </p> 
+
+                                <p>
+                                   We designed such an algorithm which arranges the appointment of pateints in such a way that the patients with higher risks is attended first to decrease the chances of severity of the pandemic to minimum.
+                                </p>
+
+                            </div>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <div class="footer-col">
+
+                            <h4 class="footer-title">Contact us <span class="title-under"></span></h4>
+
+                            <div class="footer-content">
+
+                                <div class="footer-form">
+                                    
+                                    <div class="footer-form" >
+                                    
+                                    <form action="mailto:anuraj.agarwal2019.vitstudent.ac.in" class="ajax-form">
+
+                                        <div class="form-group">
+                                            <input type="text" name="name" class="form-control" placeholder="Name" required>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <input type="email" name="email" class="form-control" placeholder="E-mail" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <textarea name="message" class="form-control" placeholder="Message" required></textarea>
+                                        </div>
+
+                                         <div class="form-group">
+                                            <button type="submit" class="btn btn-submit pull-right">Send message</button>
+                                        </div>
+                                        
+                                    </form>
+
+                                </div>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                
+                
+            </div>
+
+            
+        </div>
+
+        <div class="footer-bottom">
+
+            <div class="container text-right">
+                The Mask @ copyright 
+            </div>
+        </div>
+        
+    </footer>
+    </div>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script >
+ 
+</script>
+</body>
+</html>

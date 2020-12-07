@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+	Operating System	
+	</title>
+	<meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="index.html">Covid Patient Scheduling</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="home.html">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active ">
+        <a class="nav-link" href="form.html">Fill form</a>
+      </li>
+      </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Appointment Form </h1>
+    <p class="lead">Our algorithm will prioritize the patients according to their age and again prioritized on the basis of symptoms and medical history.
+</p>
+  </div>
+</div>
+<section class="fo wy-5">
+  <div class="py-5">
+    <h2 class="text-center">Application Details</h2>
+  </div>
+  <div class=" w-50 m-auto">
+    <form action="" method="post">
+      <div class ="row register-form ">
+                <div class="col-md-6">
+        <div class="form-group">
+          <input type="text" class="form-control" id="Bno" name="Bno" aria-describedby="Bno" placeholder="Bill no"  required > 
+        </div>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Hno</label> -->
+          <input type="Hno" class="form-control" id="Hno" name="Hno" aria-describedby="Hno" placeholder="Hospital no"  required> 
+        </div>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Mrdno</label> -->
+          <input type="Mrdno" class="form-control" id="Mrdno" name="Mrdno" aria-describedby="Mrdno" placeholder="Mrdno"  required> 
+        </div>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Pname</label> -->
+          <input type="Pname" class="form-control" id="Pname" name="Pname" aria-describedby="Pname" placeholder="Patient name"  required> 
+        </div>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Department</label> -->
+          <input type="Department" class="form-control" id="Department" name="Department" aria-describedby="Department" placeholder="Department"  required> 
+        </div>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Date</label> -->
+          <input type="text" class="form-control" id="Date" name="Date" aria-describedby="Date" placeholder="Date"   onfocus="(this.type='date')" onblur="(this.type='text')" required> 
+        </div>
+        </div>
+        <div class="col-md-5">
+          <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Rrent</label> -->
+          <input type="Rrent" class="form-control" id="Rrent" name="Rrent" aria-describedby="Rrent" placeholder="Room rent"  required> 
+        </div>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Lab</label> -->
+          <input type="Lab" class="form-control" id="Lab" name="Lab" aria-describedby="Lab" placeholder="Lab"  required> 
+        </div>
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Ad</label> -->
+          <input type="text" class="form-control" id="Ad" name="Ad" aria-describedby="Ad" placeholder="Arriving date"  onfocus="(this.type='date')" onblur="(this.type='text')" required> 
+        </div>
+  
+        <div class="form-group">
+          <!-- <label for="exampleInputEmail1">Dd</label> -->
+          <input type="text" class="form-control" id="Dd" name="Dd" aria-describedby="Dd" placeholder="Departure date"  onfocus="(this.type='date')" onblur="(this.type='text')" required> 
+        </div>
+  
+        
+          <div class="form-group">
+            <!-- <label for="exampleInputEmail1">Amount</label> -->
+            <input type="number" step="0.01" class="form-control" id="Amount" name="Amount" aria-describedby="Amount" placeholder="Amount"   required> 
+          </div> 
+</div>
+       <button type="submit" name="submit1" class="btn btn-success m-auto col-md-4">Submit</button>
+    </form>
+
+    <form>
+       <button type="submit" name="submit1" class="btn btn-warning m-auto"> <a class="text-white" href="select.html">Show Appointment Number and Time</a></button>
+    </form>
+
+   
+  </div>
+</section> 
+<footer class="pt-5">
+  <h6 class="p-3 bg-dark text-white text-center">@the_group</h6>
+</footer>
+
+
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
